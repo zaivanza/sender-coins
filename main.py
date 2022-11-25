@@ -370,10 +370,10 @@ if __name__ == "__main__":
 
     cprint(f'\nsubscribe to us : https://t.me/hodlmodeth', 'magenta')
     
-    with open("sender/private_keys.txt", "r") as f:
+    with open("private_keys.txt", "r") as f:
         keys_list = [row.strip() for row in f]
 
-    with open("sender/recepients.txt", "r") as f:
+    with open("recepients.txt", "r") as f:
         recepients = [row.strip() for row in f]
 
     prices()
@@ -530,3 +530,4 @@ Chain.
 
         headers = ['amount', 'from', 'to', 'result']
         cprint(tabulate(table, headers, tablefmt='double_outline'), 'white')
+        
