@@ -104,7 +104,10 @@ def transfer(privatekey, amount_to_transfer, token_decimal, to_address, chain_id
 
     except Exception as error:
         cprint(f'>>> transfer : {privatekey} | {error}', 'red')
-        table.append([f'{symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
+        try:
+            table.append([f'{decimal.Decimal(str(amount_to_transfer))} {symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
+        except:
+            table.append([f'{symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
     
 def transfer_eth(privatekey, amount_to_transfer, to_address, chain_id, scan, rpc_chain, symbol):
     try:
@@ -135,7 +138,10 @@ def transfer_eth(privatekey, amount_to_transfer, to_address, chain_id, scan, rpc
 
     except Exception as error:
         cprint(f'>>> transfer : {privatekey} | {error}', 'red')
-        table.append([f'{symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
+        try:
+            table.append([f'{decimal.Decimal(str(amount_to_transfer))} {symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
+        except:
+            table.append([f'{symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
 
 
 data = {
