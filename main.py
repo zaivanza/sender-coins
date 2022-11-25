@@ -50,7 +50,8 @@ def check_balance(privatekey, rpc_chain, symbol):
 
 
     except Exception as error:
-        cprint(f'error : {error}', 'yellow')
+        # cprint(f'error : {error}', 'yellow')
+        None
 
 def check_token_balance(privatekey, rpc_chain, address_contract, ABI, symbol, token_decimal):
     try:
@@ -68,7 +69,8 @@ def check_token_balance(privatekey, rpc_chain, address_contract, ABI, symbol, to
         return humanReadable
 
     except Exception as error:
-        cprint(f'error : {error}', 'yellow')
+        # cprint(f'error : {error}', 'yellow')
+        None
 
 table = []
 def transfer(privatekey, amount_to_transfer, token_decimal, to_address, chain_id, scan, rpc_chain, address_contract, ABI, symbol):
@@ -102,7 +104,7 @@ def transfer(privatekey, amount_to_transfer, token_decimal, to_address, chain_id
 
     except Exception as error:
         cprint(f'>>> transfer : {privatekey} | {error}', 'red')
-        table.append([f'{decimal.Decimal(str(amount_to_transfer))} {symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
+        table.append([f'{symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
     
 def transfer_eth(privatekey, amount_to_transfer, to_address, chain_id, scan, rpc_chain, symbol):
     try:
@@ -133,7 +135,7 @@ def transfer_eth(privatekey, amount_to_transfer, to_address, chain_id, scan, rpc
 
     except Exception as error:
         cprint(f'>>> transfer : {privatekey} | {error}', 'red')
-        table.append([f'{decimal.Decimal(str(amount_to_transfer))} {symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
+        table.append([f'{symbol}', address, to_address, '\u001b[31merror\u001b[0m'])
 
 
 data = {
@@ -437,7 +439,10 @@ Chain.
             cprint('\nтакого токена в data нет :(', 'yellow')
             address_contract = input('напиши address токена : ')
             token_decimal = input('напиши decimal токена : ')
-            ABI = input('напиши ABI токена : ')
+            get_abi = input('добавь ABI токена в token.abi и напиши yes : ')
+            # read abi from text file
+            with open('token.abi','r') as f:
+                ABI = json.load(f)
 
     all_transfer = input('выводим весь баланс токенов? yes / no : ')
     if all_transfer == 'no':
@@ -530,4 +535,3 @@ Chain.
 
         headers = ['amount', 'from', 'to', 'result']
         cprint(tabulate(table, headers, tablefmt='double_outline'), 'white')
-        
