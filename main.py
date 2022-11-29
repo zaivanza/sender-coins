@@ -130,11 +130,11 @@ def transfer_eth(privatekey, amount_to_transfer, to_address, chain_id, scan, rpc
             'value': int(amount)
         }
 
-        # tx_signed = web3.eth.account.signTransaction(tx_built, privatekey)
-        # tx_hash = web3.eth.sendRawTransaction(tx_signed.rawTransaction)
+        tx_signed = web3.eth.account.signTransaction(tx_built, privatekey)
+        tx_hash = web3.eth.sendRawTransaction(tx_signed.rawTransaction)
 
-        # cprint(f'>>> transfer : {decimal.Decimal(str(amount_to_transfer))} {symbol} | {address} => {to_address} | {scan}/{web3.toHex(tx_hash)}', 'green')
-        # table.append([f'{decimal.Decimal(str(amount_to_transfer))} {symbol}', address, to_address, '\u001b[32msend\u001b[0m'])
+        cprint(f'>>> transfer : {decimal.Decimal(str(amount_to_transfer))} {symbol} | {address} => {to_address} | {scan}/{web3.toHex(tx_hash)}', 'green')
+        table.append([f'{decimal.Decimal(str(amount_to_transfer))} {symbol}', address, to_address, '\u001b[32msend\u001b[0m'])
 
     except Exception as error:
         cprint(f'>>> transfer : {privatekey} | {error}', 'red')
@@ -185,8 +185,8 @@ if __name__ == "__main__":
 
         to_address = recepients[zero]
 
-        # AMOUNT_TO_TRANSFER = round(random.uniform(1, 3), 5) # от 1 до 3, 5 цифр после точки
-        AMOUNT_TO_TRANSFER = 0.1 # фиксированный amount
+        AMOUNT_TO_TRANSFER = round(random.uniform(1, 3), 5) # от 1 до 3, 5 цифр после точки
+        # AMOUNT_TO_TRANSFER = 0.1 # фиксированный amount
         # AMOUNT_TO_TRANSFER = 'all_balance' # весь баланс
         CHAIN = 'Optimism' # Ethereum | Optimism | BSC | Polygon | Fantom | Arbitrum One | Arbitrum Nova | AVAX
         ADDRESS_CONTRACT = '0x4200000000000000000000000000000000000042' # пусто если eth
